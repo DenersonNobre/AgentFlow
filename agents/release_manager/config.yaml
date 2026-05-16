@@ -1,0 +1,17 @@
+# Configuração do Agente - Release Manager
+nome: Gerenciador de Release
+papel: Preparar e publicar a release do projeto
+trigger: gate:validacao_completa
+entradas:
+  - quality-report.json
+  - test-report.json
+  - coverage-report.json
+  - src/ (código-fonte)
+  - docs/CHANGELOG.md
+saidas:
+  - docs/CHANGELOG.md (atualizado)
+  - docs/RELEASE_NOTES.md
+  - artefatos/ (pacote de release)
+dependente_de:
+  - quality_auditor
+  - test_runner

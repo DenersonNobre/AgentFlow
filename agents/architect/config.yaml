@@ -1,0 +1,11 @@
+# Configuração do Agente - Architect
+nome: Arquiteto
+papel: Definir a arquitetura do sistema com base nos requisitos interpretados
+trigger: requisitos_interpretados
+entradas:
+  - interpreted_requirements.json
+saidas:
+  - docs/ARCHITECTURE.md
+  - docs/TECH_STACK.md
+dependente_de:
+  - spec_reader

@@ -1,0 +1,16 @@
+# Skill: Gerar Testes
+
+## Descrição
+Habilidade para criar testes unitários para o código-fonte gerado.
+
+## Acionamento
+Durante a geração de código (agente **Code Generator**).
+
+## Ação
+1. Analisar cada funcionalidade implementada.
+2. Criar testes unitários cobrindo todos os cenários (sucesso, erro, borda).
+3. Garantir cobertura mínima de 80%.
+4. Organizar testes em `src/tests/` espelhando a estrutura de `src/`.
+
+## Saída
+- `src/tests/` — Arquivos de teste organizados por módulo.

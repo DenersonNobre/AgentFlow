@@ -1,0 +1,4 @@
+# .gitkeep - Diretório de logs do pipeline
+
+Os arquivos de log gerados pelo orquestrador são armazenados neste diretório.
+Formato: pipeline-YYYYMMDD-HHmmss.log

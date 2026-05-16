@@ -1,0 +1,18 @@
+# Skill: Revisar Código
+
+## Descrição
+Habilidade para revisar código-fonte, identificar violações de qualidade, segurança e boas práticas.
+
+## Acionamento
+Quando os testes são executados (evento: `testes_executados`).
+
+## Ação
+1. Realizar análise estática do código (lint, code smells).
+2. Realizar análise de segurança (vulnerabilidades, OWASP).
+3. Realizar análise de performance (gargalos, ineficiências).
+4. Verificar conformidade com a arquitetura definida.
+5. Gerar relatório de qualidade com violações e sugestões de correção.
+6. Bloquear pipeline se houver violações críticas.
+
+## Saída
+- `quality-report.json` — Relatório de qualidade completo com violações, severidades e sugestões.

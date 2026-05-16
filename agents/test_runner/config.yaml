@@ -1,0 +1,12 @@
+# Configuração do Agente - Test Runner
+nome: Executor de Testes
+papel: Executar testes automatizados e medir cobertura
+trigger: codigo_gerado
+entradas:
+  - src/ (código-fonte)
+  - src/tests/ (testes gerados pelo Code Generator)
+saidas:
+  - test-report.json
+  - coverage-report.json
+dependente_de:
+  - code_generator

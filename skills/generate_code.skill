@@ -1,0 +1,17 @@
+# Skill: Gerar Código
+
+## Descrição
+Habilidade para gerar código-fonte a partir de especificações e arquitetura definidas.
+
+## Acionamento
+Quando a arquitetura estiver definida e os requisitos extraídos (evento: `arquitetura_definida`).
+
+## Ação
+1. Analisar requisitos, arquitetura e stack tecnológico.
+2. Criar estrutura de diretórios (`src/`).
+3. Implementar cada requisito funcional como código seguindo SOLID/DRY.
+4. Gerar testes unitários para cada funcionalidade.
+5. Gerar documentação inline (JSDoc, docstrings).
+
+## Saída
+- `src/` — Código-fonte seguindo os padrões e estrutura do projeto.

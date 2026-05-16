@@ -1,0 +1,19 @@
+# Skill: Gerar Documentação
+
+## Descrição
+Habilidade para gerar e atualizar documentação técnica do projeto.
+
+## Acionamento
+Quando a release é concluída (evento: `release_concluida`).
+
+## Ação
+1. Analisar as mudanças implementadas na release.
+2. Atualizar `docs/CHANGELOG.md` com as mudanças.
+3. Gerar `docs/RELEASE_NOTES.md` para a versão atual.
+4. Atualizar documentação de API se houver mudanças.
+5. Atualizar README.md principal se necessário.
+
+## Saída
+- `docs/CHANGELOG.md` (atualizado)
+- `docs/RELEASE_NOTES.md`
+- Documentação de API atualizada.

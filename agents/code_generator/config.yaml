@@ -1,0 +1,13 @@
+# Configuração do Agente - Code Generator
+nome: Gerador de Código
+papel: Implementar o código-fonte e seus respectivos testes unitários
+trigger: arquitetura_definida
+entradas:
+  - interpreted_requirements.json
+  - docs/ARCHITECTURE.md
+  - docs/TECH_STACK.md
+saidas:
+  - src/ (código-fonte gerado)
+  - src/tests/ (testes unitários gerados)
+dependente_de:
+  - architect

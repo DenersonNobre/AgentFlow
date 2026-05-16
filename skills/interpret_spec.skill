@@ -1,0 +1,18 @@
+# Skill: Interpretar Especificações
+
+## Descrição
+Habilidade para interpretar documentos de especificação técnica e extrair requisitos estruturados.
+
+## Acionamento
+Quando o arquivo de especificação estiver disponível (evento: `spec_disponivel`).
+
+## Ação
+1. Ler `docs/PRD.md` e `docs/SPEC.md`.
+2. Extrair requisitos funcionais e não-funcionais.
+3. Extrair critérios de aceitação.
+4. Identificar dependências entre requisitos.
+5. Validar consistência entre os documentos.
+6. Gerar JSON estruturado com todos os artefatos.
+
+## Saída
+- `interpreted_requirements.json` — JSON com requisitos, dependências e critérios de aceitação.

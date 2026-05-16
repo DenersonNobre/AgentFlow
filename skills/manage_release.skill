@@ -1,0 +1,21 @@
+# Skill: Gerenciar Release
+
+## Descrição
+Habilidade para preparar e publicar releases, gerenciar versionamento e gerar artefatos.
+
+## Acionamento
+Quando a qualidade é aprovada (evento: `qualidade_aprovada`).
+
+## Ação
+1. Analisar mudanças desde a última release.
+2. Determinar incremento de versão (MAJOR/MINOR/PATCH).
+3. Atualizar `docs/CHANGELOG.md`.
+4. Gerar `docs/RELEASE_NOTES.md`.
+5. Compilar/empacotar o código (build).
+6. Gerar checksum e assinar artefatos.
+7. Salvar artefatos em `artefatos/`.
+
+## Saída
+- `docs/CHANGELOG.md` (atualizado)
+- `docs/RELEASE_NOTES.md`
+- `artefatos/` — Pacote de release + checksum.

@@ -1,0 +1,10 @@
+# Configuração do Agente - Spec Reader
+nome: Leitor de Especificações
+papel: Interpretar requisitos a partir dos documentos de especificação
+trigger: spec_disponivel
+entradas:
+  - docs/PRD.md
+  - docs/SPEC.md
+saidas:
+  - interpreted_requirements.json
+dependente_de: []

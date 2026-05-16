@@ -1,0 +1,38 @@
+# MCP - Configuração de Orquestração do Pipeline
+# Define a ordem de execução dos agentes, paralelismo (fan-out) e sincronização (gates).
+
+agentes:
+  - spec_reader
+  - architect
+  - code_generator
+  - test_runner
+  - quality_auditor
+  - release_manager
+
+triggers:
+  # Fase 1 — Análise (sequencial)
+  - evento: spec_disponivel
+    agente: spec_reader
+
+  - evento: requisitos_interpretados
+    agente: architect
+
+  - evento: arquitetura_definida
+    agente: code_generator
+
+  # Fase 2 — Validação paralela (fan-out)
+  # Ambos independentes: quality_auditor faz análise estática, test_runner executa testes
+  - evento: codigo_gerado
+    agente: test_runner
+
+  - evento: codigo_gerado
+    agente: quality_auditor
+
+  # Fase 3 — Gate: release_manager só executa após AMBOS concluírem
+gates:
+  - nome: validacao_completa
+    aguardar:
+      - evento: testes_executados
+      - evento: qualidade_aprovada
+    entao:
+      agente: release_manager

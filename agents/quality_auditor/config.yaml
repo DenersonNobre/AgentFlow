@@ -1,0 +1,10 @@
+# Configuração do Agente - Quality Auditor
+nome: Auditor de Qualidade
+papel: Realizar análise estática do código (lint, segurança, boas práticas)
+trigger: codigo_gerado
+entradas:
+  - src/ (código-fonte)
+saidas:
+  - quality-report.json (violações de estilo, segurança, performance)
+dependente_de:
+  - code_generator
