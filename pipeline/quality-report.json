@@ -1,0 +1,26 @@
+{
+  "analise": "flutter analyze",
+  "status": "aprovado",
+  "erros": 0,
+  "warnings": 0,
+  "infos": 0,
+  "detalhes": "APROVADO: 0 erros, 0 warnings, 0 infos — análise rigorosa aprovada.",
+  "alertas_individuais": [],
+  "testes": {
+    "total": 140,
+    "passaram": 140,
+    "falharam": 0,
+    "pulados": 0,
+    "comando": "flutter test --machine"
+  },
+  "cobertura": "Não mensurada (sem flag --coverage no pipeline atual)",
+  "arquitetura": {
+    "padroes": ["Clean Architecture", "BLoC pattern", "Repository pattern", "GoRouter navigation", "GetIt DI"],
+    "core_widgets": 5,
+    "telas_fatiadas_em_widgets": 6,
+    "features": 6,
+    "total_arquivos_dart": 73
+  },
+  "qualidade_geral": "aprovado",
+  "resumo": "APROVADO: 16 alertas corrigidos — unused imports removidos, print convertido para debugPrint com import, underscores simplificados, shared_preferences adicionado como dev_dependency, non-null assertion desnecessária removida."
+}

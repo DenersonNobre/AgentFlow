@@ -1,0 +1,651 @@
+{
+  "projeto": "Venda Fácil",
+  "versao": "1.0.0",
+  "epics": [
+    {"id": "epic_auth_sync", "nome": "Autenticação e Sincronização", "arquivo": "specs/epic_auth_sync.md"},
+    {"id": "epic_clientes", "nome": "Gestão de Clientes", "arquivo": "specs/epic_clientes.md"},
+    {"id": "epic_produtos", "nome": "Gestão de Produtos", "arquivo": "specs/epic_produtos.md"},
+    {"id": "epic_vendas", "nome": "Gestão de Vendas", "arquivo": "specs/epic_vendas.md"},
+    {"id": "epic_checkout", "nome": "Contas a Receber", "arquivo": "specs/epic_checkout.md"},
+    {"id": "epic_dashboard", "nome": "Dashboard Financeiro", "arquivo": "specs/epic_dashboard.md"}
+  ],
+  "requisitos_funcionais": [
+    {
+      "id": "RF001",
+      "descricao": "Vendedor cria conta com email e senha",
+      "prioridade": "Alta",
+      "epic": "epic_auth_sync",
+      "dependente_de": [],
+      "criterios_aceitacao": ["CA001", "CA005"],
+      "tasks": ["T01", "T02", "T03", "T04", "T06", "T17"]
+    },
+    {
+      "id": "RF002",
+      "descricao": "Vendedor faz login na conta existente",
+      "prioridade": "Alta",
+      "epic": "epic_auth_sync",
+      "dependente_de": [],
+      "criterios_aceitacao": ["CA002", "CA005"],
+      "tasks": ["T01", "T02", "T03", "T04", "T05", "T17"]
+    },
+    {
+      "id": "RF003",
+      "descricao": "Sistema mantém sessão ativa mesmo após fechar o app",
+      "prioridade": "Alta",
+      "epic": "epic_auth_sync",
+      "dependente_de": ["RF001", "RF002"],
+      "criterios_aceitacao": ["CA006"],
+      "tasks": ["T01", "T03", "T04", "T07", "T17"]
+    },
+    {
+      "id": "RF004",
+      "descricao": "Vendedor recupera dados da nuvem ao fazer login em novo dispositivo",
+      "prioridade": "Alta",
+      "epic": "epic_auth_sync",
+      "dependente_de": ["RF001", "RF002"],
+      "criterios_aceitacao": ["CA002"],
+      "tasks": ["T08", "T17"]
+    },
+    {
+      "id": "RF005",
+      "descricao": "Sistema sincroniza dados automaticamente quando detecta internet",
+      "prioridade": "Alta",
+      "epic": "epic_auth_sync",
+      "dependente_de": ["RF001"],
+      "criterios_aceitacao": ["CA003"],
+      "tasks": ["T09", "T11", "T12", "T13", "T17"]
+    },
+    {
+      "id": "RF006",
+      "descricao": "Sistema mantém fila de operações pendentes (sync_log)",
+      "prioridade": "Alta",
+      "epic": "epic_auth_sync",
+      "dependente_de": ["RF005"],
+      "criterios_aceitacao": ["CA004"],
+      "tasks": ["T09", "T10", "T17"]
+    },
+    {
+      "id": "RF007",
+      "descricao": "Sistema exibe indicador visual de status da sincronização",
+      "prioridade": "Média",
+      "epic": "epic_auth_sync",
+      "dependente_de": ["RF005", "RF006"],
+      "criterios_aceitacao": ["CA004"],
+      "tasks": ["T15", "T17"]
+    },
+    {
+      "id": "RF008",
+      "descricao": "Vendedor força sincronização manualmente (botão sync)",
+      "prioridade": "Média",
+      "epic": "epic_auth_sync",
+      "dependente_de": ["RF005"],
+      "criterios_aceitacao": [],
+      "tasks": ["T09", "T16", "T17"]
+    },
+    {
+      "id": "RF009",
+      "descricao": "Sistema faz retry automático com backoff exponencial em caso de falha",
+      "prioridade": "Alta",
+      "epic": "epic_auth_sync",
+      "dependente_de": ["RF005", "RF006"],
+      "criterios_aceitacao": ["CA003"],
+      "tasks": ["T09", "T14", "T17"]
+    },
+    {
+      "id": "RF010",
+      "descricao": "Vendedor cadastra cliente com nome e telefone",
+      "prioridade": "Alta",
+      "epic": "epic_clientes",
+      "dependente_de": ["RF001", "RF002"],
+      "criterios_aceitacao": ["CA007", "CA008", "CA010", "CA011"],
+      "tasks": ["T18", "T19", "T20", "T21", "T22", "T23", "T25", "T27", "T28"]
+    },
+    {
+      "id": "RF011",
+      "descricao": "Vendedor adiciona observações ao cliente (opcional)",
+      "prioridade": "Média",
+      "epic": "epic_clientes",
+      "dependente_de": ["RF010"],
+      "criterios_aceitacao": [],
+      "tasks": ["T18", "T20", "T21", "T22", "T23", "T25", "T28"]
+    },
+    {
+      "id": "RF012",
+      "descricao": "Vendedor edita dados de um cliente existente",
+      "prioridade": "Alta",
+      "epic": "epic_clientes",
+      "dependente_de": ["RF010"],
+      "criterios_aceitacao": [],
+      "tasks": ["T18", "T20", "T21", "T22", "T23", "T25", "T28"]
+    },
+    {
+      "id": "RF013",
+      "descricao": "Vendedor remove um cliente",
+      "prioridade": "Média",
+      "epic": "epic_clientes",
+      "dependente_de": ["RF010"],
+      "criterios_aceitacao": [],
+      "tasks": ["T18", "T20", "T21", "T22", "T23", "T28"]
+    },
+    {
+      "id": "RF014",
+      "descricao": "Vendedor busca cliente pelo nome ou telefone com autocomplete",
+      "prioridade": "Alta",
+      "epic": "epic_clientes",
+      "dependente_de": ["RF010"],
+      "criterios_aceitacao": ["CA009"],
+      "tasks": ["T18", "T20", "T21", "T22", "T23", "T24", "T28"]
+    },
+    {
+      "id": "RF015",
+      "descricao": "Vendedor visualiza lista de clientes ordenada por nome",
+      "prioridade": "Alta",
+      "epic": "epic_clientes",
+      "dependente_de": ["RF010"],
+      "criterios_aceitacao": ["CA007"],
+      "tasks": ["T18", "T20", "T21", "T22", "T23", "T24", "T28"]
+    },
+    {
+      "id": "RF016",
+      "descricao": "Vendedor visualiza histórico de vendas de um cliente específico",
+      "prioridade": "Média",
+      "epic": "epic_clientes",
+      "dependente_de": ["RF010", "RF024"],
+      "criterios_aceitacao": ["CA012"],
+      "tasks": ["T18", "T22", "T23", "T26", "T28"]
+    },
+    {
+      "id": "RF017",
+      "descricao": "Vendedor visualiza total devido por cliente",
+      "prioridade": "Média",
+      "epic": "epic_clientes",
+      "dependente_de": ["RF010", "RF039"],
+      "criterios_aceitacao": [],
+      "tasks": ["T18", "T22", "T23", "T26", "T28"]
+    },
+    {
+      "id": "RF018",
+      "descricao": "Vendedor cadastra produto com nome e preço",
+      "prioridade": "Alta",
+      "epic": "epic_produtos",
+      "dependente_de": ["RF001", "RF002"],
+      "criterios_aceitacao": ["CA013", "CA016", "CA017"],
+      "tasks": ["T29", "T30", "T31", "T32", "T33", "T34", "T36", "T37", "T38"]
+    },
+    {
+      "id": "RF019",
+      "descricao": "Vendedor edita nome e/ou preço de um produto existente",
+      "prioridade": "Alta",
+      "epic": "epic_produtos",
+      "dependente_de": ["RF018"],
+      "criterios_aceitacao": ["CA014"],
+      "tasks": ["T29", "T31", "T32", "T33", "T34", "T36", "T38"]
+    },
+    {
+      "id": "RF020",
+      "descricao": "Vendedor remove um produto do catálogo",
+      "prioridade": "Média",
+      "epic": "epic_produtos",
+      "dependente_de": ["RF018"],
+      "criterios_aceitacao": [],
+      "tasks": ["T29", "T31", "T32", "T33", "T34", "T38"]
+    },
+    {
+      "id": "RF021",
+      "descricao": "Vendedor busca produto pelo nome com autocomplete",
+      "prioridade": "Alta",
+      "epic": "epic_produtos",
+      "dependente_de": ["RF018"],
+      "criterios_aceitacao": ["CA015"],
+      "tasks": ["T29", "T31", "T32", "T33", "T34", "T35", "T38"]
+    },
+    {
+      "id": "RF022",
+      "descricao": "Vendedor visualiza lista de produtos ordenada por nome",
+      "prioridade": "Alta",
+      "epic": "epic_produtos",
+      "dependente_de": ["RF018"],
+      "criterios_aceitacao": ["CA013"],
+      "tasks": ["T29", "T31", "T32", "T33", "T34", "T35", "T38"]
+    },
+    {
+      "id": "RF023",
+      "descricao": "Vendedor duplica um produto existente",
+      "prioridade": "Baixa",
+      "epic": "epic_produtos",
+      "dependente_de": ["RF018"],
+      "criterios_aceitacao": [],
+      "tasks": ["T29", "T33", "T34", "T38"]
+    },
+    {
+      "id": "RF024",
+      "descricao": "Vendedor inicia nova venda selecionando um cliente (ou venda avulsa)",
+      "prioridade": "Alta",
+      "epic": "epic_vendas",
+      "dependente_de": ["RF001", "RF002", "RF010", "RF018"],
+      "criterios_aceitacao": ["CA018"],
+      "tasks": ["T39", "T43", "T44", "T45", "T52", "T53"]
+    },
+    {
+      "id": "RF025",
+      "descricao": "Vendedor adiciona produtos à venda com quantidade",
+      "prioridade": "Alta",
+      "epic": "epic_vendas",
+      "dependente_de": ["RF024"],
+      "criterios_aceitacao": ["CA019"],
+      "tasks": ["T39", "T40", "T43", "T44", "T46", "T47", "T53"]
+    },
+    {
+      "id": "RF026",
+      "descricao": "Vendedor ajusta quantidade e preço unitário de cada item",
+      "prioridade": "Alta",
+      "epic": "epic_vendas",
+      "dependente_de": ["RF024", "RF025"],
+      "criterios_aceitacao": ["CA020"],
+      "tasks": ["T39", "T43", "T44", "T53"]
+    },
+    {
+      "id": "RF027",
+      "descricao": "Vendedor remove produtos da venda antes de finalizar",
+      "prioridade": "Alta",
+      "epic": "epic_vendas",
+      "dependente_de": ["RF024", "RF025"],
+      "criterios_aceitacao": [],
+      "tasks": ["T39", "T43", "T44", "T53"]
+    },
+    {
+      "id": "RF028",
+      "descricao": "Sistema calcula subtotal por item e total geral automaticamente",
+      "prioridade": "Alta",
+      "epic": "epic_vendas",
+      "dependente_de": ["RF025"],
+      "criterios_aceitacao": ["CA019", "CA020"],
+      "tasks": ["T39", "T43", "T44", "T51", "T53"]
+    },
+    {
+      "id": "RF029",
+      "descricao": "Vendedor seleciona forma de pagamento (dinheiro/Pix/cartão/pendente)",
+      "prioridade": "Alta",
+      "epic": "epic_vendas",
+      "dependente_de": ["RF024"],
+      "criterios_aceitacao": ["CA021"],
+      "tasks": ["T39", "T43", "T44", "T48", "T53"]
+    },
+    {
+      "id": "RF030",
+      "descricao": "Vendedor finaliza a venda com confirmação",
+      "prioridade": "Alta",
+      "epic": "epic_vendas",
+      "dependente_de": ["RF025", "RF028", "RF029"],
+      "criterios_aceitacao": ["CA021", "CA022"],
+      "tasks": ["T39", "T43", "T44", "T49", "T53"]
+    },
+    {
+      "id": "RF031",
+      "descricao": "Sistema persiste a venda e seus itens no SQLite",
+      "prioridade": "Alta",
+      "epic": "epic_vendas",
+      "dependente_de": ["RF030"],
+      "criterios_aceitacao": ["CA022"],
+      "tasks": ["T39", "T40", "T41", "T42", "T43", "T44", "T53"]
+    },
+    {
+      "id": "RF032",
+      "descricao": "Vendedor visualiza resumo da venda após finalizar",
+      "prioridade": "Média",
+      "epic": "epic_vendas",
+      "dependente_de": ["RF030"],
+      "criterios_aceitacao": ["CA024"],
+      "tasks": ["T39", "T43", "T44", "T50", "T53"]
+    },
+    {
+      "id": "RF033",
+      "descricao": "Vendedor cancela uma venda em andamento",
+      "prioridade": "Média",
+      "epic": "epic_vendas",
+      "dependente_de": ["RF024"],
+      "criterios_aceitacao": ["CA023"],
+      "tasks": ["T39", "T43", "T44", "T53"]
+    },
+    {
+      "id": "RF034",
+      "descricao": "Vendedor visualiza lista de vendas com status pendente",
+      "prioridade": "Alta",
+      "epic": "epic_checkout",
+      "dependente_de": ["RF030", "RF031"],
+      "criterios_aceitacao": ["CA025"],
+      "tasks": ["T54", "T55", "T56", "T57", "T63"]
+    },
+    {
+      "id": "RF035",
+      "descricao": "Vendedor filtra contas a receber por cliente",
+      "prioridade": "Média",
+      "epic": "epic_checkout",
+      "dependente_de": ["RF034", "RF010"],
+      "criterios_aceitacao": ["CA030"],
+      "tasks": ["T54", "T56", "T58", "T63"]
+    },
+    {
+      "id": "RF036",
+      "descricao": "Vendedor ordena contas por data (mais antigas primeiro)",
+      "prioridade": "Média",
+      "epic": "epic_checkout",
+      "dependente_de": ["RF034"],
+      "criterios_aceitacao": [],
+      "tasks": ["T54", "T56", "T57", "T63"]
+    },
+    {
+      "id": "RF037",
+      "descricao": "Vendedor marca uma venda como paga (baixa total)",
+      "prioridade": "Alta",
+      "epic": "epic_checkout",
+      "dependente_de": ["RF034"],
+      "criterios_aceitacao": ["CA026"],
+      "tasks": ["T54", "T56", "T59", "T61", "T63"]
+    },
+    {
+      "id": "RF038",
+      "descricao": "Vendedor registra pagamento parcial",
+      "prioridade": "Alta",
+      "epic": "epic_checkout",
+      "dependente_de": ["RF034"],
+      "criterios_aceitacao": ["CA027", "CA028"],
+      "tasks": ["T54", "T56", "T59", "T61", "T62", "T63"]
+    },
+    {
+      "id": "RF039",
+      "descricao": "Vendedor visualiza valor total em aberto",
+      "prioridade": "Alta",
+      "epic": "epic_checkout",
+      "dependente_de": ["RF034"],
+      "criterios_aceitacao": ["CA029"],
+      "tasks": ["T54", "T56", "T57", "T62", "T63"]
+    },
+    {
+      "id": "RF040",
+      "descricao": "Vendedor visualiza valor total em aberto por cliente",
+      "prioridade": "Média",
+      "epic": "epic_checkout",
+      "dependente_de": ["RF034", "RF010"],
+      "criterios_aceitacao": [],
+      "tasks": ["T54", "T56", "T58", "T63"]
+    },
+    {
+      "id": "RF041",
+      "descricao": "Vendedor visualiza histórico de pagamentos de cada venda",
+      "prioridade": "Baixa",
+      "epic": "epic_checkout",
+      "dependente_de": ["RF037", "RF038"],
+      "criterios_aceitacao": [],
+      "tasks": ["T54", "T56", "T60", "T63"]
+    },
+    {
+      "id": "RF042",
+      "descricao": "Vendedor visualiza total vendido no dia",
+      "prioridade": "Alta",
+      "epic": "epic_dashboard",
+      "dependente_de": ["RF030", "RF031"],
+      "criterios_aceitacao": ["CA031", "CA035"],
+      "tasks": ["T64", "T65", "T66", "T67", "T70", "T71", "T72", "T73"]
+    },
+    {
+      "id": "RF043",
+      "descricao": "Vendedor visualiza quantidade de vendas no dia",
+      "prioridade": "Alta",
+      "epic": "epic_dashboard",
+      "dependente_de": ["RF030", "RF031"],
+      "criterios_aceitacao": ["CA031"],
+      "tasks": ["T64", "T65", "T66", "T67", "T70", "T71", "T72", "T73"]
+    },
+    {
+      "id": "RF044",
+      "descricao": "Vendedor visualiza total recebido no dia",
+      "prioridade": "Alta",
+      "epic": "epic_dashboard",
+      "dependente_de": ["RF037"],
+      "criterios_aceitacao": ["CA032"],
+      "tasks": ["T64", "T65", "T66", "T67", "T70", "T71", "T72", "T73"]
+    },
+    {
+      "id": "RF045",
+      "descricao": "Vendedor visualiza total a receber geral",
+      "prioridade": "Alta",
+      "epic": "epic_dashboard",
+      "dependente_de": ["RF039"],
+      "criterios_aceitacao": ["CA032"],
+      "tasks": ["T64", "T65", "T66", "T67", "T70", "T71", "T72", "T73"]
+    },
+    {
+      "id": "RF046",
+      "descricao": "Vendedor visualiza vendas dos últimos 7 dias em lista",
+      "prioridade": "Média",
+      "epic": "epic_dashboard",
+      "dependente_de": ["RF030", "RF031"],
+      "criterios_aceitacao": ["CA033"],
+      "tasks": ["T64", "T65", "T66", "T68", "T70", "T71", "T72", "T73"]
+    },
+    {
+      "id": "RF047",
+      "descricao": "Vendedor visualiza gráfico de barras (últimos 7 dias)",
+      "prioridade": "Média",
+      "epic": "epic_dashboard",
+      "dependente_de": ["RF030", "RF031"],
+      "criterios_aceitacao": ["CA034"],
+      "tasks": ["T64", "T65", "T66", "T69", "T70", "T71", "T72", "T73"]
+    },
+    {
+      "id": "RF048",
+      "descricao": "Vendedor visualiza ranking de clientes",
+      "prioridade": "Baixa",
+      "epic": "epic_dashboard",
+      "dependente_de": ["RF030", "RF031"],
+      "criterios_aceitacao": [],
+      "tasks": ["T64", "T65", "T66", "T72", "T73"]
+    },
+    {
+      "id": "RF049",
+      "descricao": "Vendedor visualiza forma de pagamento mais usada",
+      "prioridade": "Baixa",
+      "epic": "epic_dashboard",
+      "dependente_de": ["RF030", "RF031"],
+      "criterios_aceitacao": [],
+      "tasks": ["T64", "T65", "T66", "T72", "T73"]
+    }
+  ],
+  "requisitos_nao_funcionais": [
+    {"id": "RNF001", "descricao": "Autenticação com timeout de 10s e feedback visual", "criterio": "Usabilidade", "fonte": "epic_auth_sync"},
+    {"id": "RNF002", "descricao": "Sincronização não bloqueia a UI (executa em isolate separado)", "criterio": "Performance", "fonte": "epic_auth_sync"},
+    {"id": "RNF003", "descricao": "Sync engine não consome mais que 5% bateria por sessão", "criterio": "Eficiência", "fonte": "epic_auth_sync"},
+    {"id": "RNF004", "descricao": "Dados do usuário isolados por RLS no Supabase", "criterio": "Segurança", "fonte": "epic_auth_sync"},
+    {"id": "RNF005", "descricao": "Sessão persistente usando flutter_secure_storage", "criterio": "Segurança", "fonte": "epic_auth_sync"},
+    {"id": "RNF006", "descricao": "App deve funcionar sem internet (modo offline-first)", "criterio": "Disponibilidade", "fonte": "PRD"},
+    {"id": "RNF007", "descricao": "Interface intuitiva para usuários não técnicos", "criterio": "Usabilidade", "fonte": "PRD"},
+    {"id": "RNF008", "descricao": "Registro de venda deve ser concluído em menos de 30 segundos", "criterio": "Performance", "fonte": "PRD"},
+    {"id": "RNF009", "descricao": "Dados sincronizados sem conflitos", "criterio": "Confiabilidade", "fonte": "PRD"},
+    {"id": "RNF010", "descricao": "Dados restaurados da nuvem após login em novo dispositivo", "criterio": "Recuperação", "fonte": "PRD"},
+    {"id": "RNF011", "descricao": "App mobile-first (Android/iOS), sem versão web", "criterio": "Plataforma", "fonte": "PRD"},
+    {"id": "RNF012", "descricao": "Sem integração com gateways de pagamento na v1.0", "criterio": "Escopo", "fonte": "PRD"},
+    {"id": "RNF013", "descricao": "Backup criptografado no Supabase", "criterio": "Segurança", "fonte": "PRD"},
+    {"id": "RNF014", "descricao": "Projeto concluído em prazo curto (poucas horas)", "criterio": "Gerenciamento", "fonte": "PRD"},
+    {"id": "RNF015", "descricao": "Autenticação obrigatória via Supabase Auth com JWT", "criterio": "Segurança", "fonte": "SPEC"},
+    {"id": "RNF016", "descricao": "RLS por user_id no Supabase para todos os dados", "criterio": "Segurança", "fonte": "SPEC"},
+    {"id": "RNF017", "descricao": "Validação de entrada em todos os campos", "criterio": "Segurança", "fonte": "SPEC"},
+    {"id": "RNF018", "descricao": "Todas as tabelas com id TEXT PRIMARY KEY, created_at, updated_at, sync_status", "criterio": "Padronização", "fonte": "SPEC"},
+    {"id": "RNF019", "descricao": "Integridade referencial: vendas com FK para clientes, itens_venda com FK para vendas e produtos", "criterio": "Integridade", "fonte": "SPEC"},
+    {"id": "RNF020", "descricao": "Escrita local-first no sqflite antes de sync remoto", "criterio": "Arquitetura", "fonte": "SPEC"},
+    {"id": "RNF021", "descricao": "Leitura do sqflite local para resposta instantânea", "criterio": "Performance", "fonte": "SPEC"},
+    {"id": "RNF022", "descricao": "Dart 3.x com tipagem segura", "criterio": "Tecnologia", "fonte": "SPEC"},
+    {"id": "RNF023", "descricao": "Material Design 3 para componentes de UI", "criterio": "UI/UX", "fonte": "SPEC"},
+    {"id": "RNF024", "descricao": "Cobertura de testes unitários, widget e integração com flutter_test + mocktail", "criterio": "Qualidade", "fonte": "SPEC"},
+    {"id": "RNF025", "descricao": "Roteamento declarativo com GoRouter", "criterio": "Navegação", "fonte": "SPEC"},
+    {"id": "RNF026", "descricao": "Injeção de dependência com GetIt", "criterio": "Arquitetura", "fonte": "SPEC"}
+  ],
+  "criterios_aceitacao": [
+    {"id": "CA001", "descricao": "Vendedor cria conta com email válido e senha > 6 caracteres", "condicao": "Conta criada, redirecionado para home"},
+    {"id": "CA002", "descricao": "Vendedor faz login em novo celular", "condicao": "Todos os dados são restaurados"},
+    {"id": "CA003", "descricao": "Vendedor registra venda offline, depois volta à internet", "condicao": "Venda aparece no Supabase em < 30s"},
+    {"id": "CA004", "descricao": "Indicador de sync mostra pendente quando há operações na fila", "condicao": "Bolinha vermelha visível no topo"},
+    {"id": "CA005", "descricao": "Vendedor tenta login com senha errada 3x", "condicao": "App exibe Credenciais inválidas"},
+    {"id": "CA006", "descricao": "App fechado e reaberto sem internet", "condicao": "Sessão mantida, app funcional offline"},
+    {"id": "CA007", "descricao": "Vendedor cadastra cliente apenas com nome", "condicao": "Cliente salvo e aparece na lista"},
+    {"id": "CA008", "descricao": "Vendedor cadastra cliente com nome e telefone", "condicao": "Cliente salvo com ambos os campos"},
+    {"id": "CA009", "descricao": "Vendedor busca por 'jo' e encontra 'João' e 'José'", "condicao": "Lista filtrada instantaneamente"},
+    {"id": "CA010", "descricao": "Vendedor tenta cadastrar cliente sem nome", "condicao": "Campo exibe 'Nome é obrigatório'"},
+    {"id": "CA011", "descricao": "Vendedor tenta cadastrar cliente com telefone já existente", "condicao": "Alerta 'Telefone já cadastrado'"},
+    {"id": "CA012", "descricao": "Vendedor acessa histórico de vendas de um cliente", "condicao": "Lista exibe últimas vendas com data, valor e status"},
+    {"id": "CA013", "descricao": "Vendedor cadastra produto 'Camiseta' por R$ 49,90", "condicao": "Produto aparece no catálogo"},
+    {"id": "CA014", "descricao": "Vendedor altera preço de 'Camiseta' para R$ 39,90", "condicao": "Preço atualizado na lista"},
+    {"id": "CA015", "descricao": "Vendedor busca por 'cam' e encontra 'Camiseta' e 'Camisa'", "condicao": "Lista filtrada em < 1s"},
+    {"id": "CA016", "descricao": "Vendedor tenta cadastrar produto sem nome", "condicao": "Campo exibe 'Nome é obrigatório'"},
+    {"id": "CA017", "descricao": "Vendedor tenta cadastrar preço negativo", "condicao": "Campo exibe 'Preço deve ser maior que zero'"},
+    {"id": "CA018", "descricao": "Venda sem cliente selecionado", "condicao": "Criada como 'Consumidor Final'"},
+    {"id": "CA019", "descricao": "Adiciona 3 camisetas a R$ 29,90", "condicao": "Subtotal R$ 89,70"},
+    {"id": "CA020", "descricao": "Altera quantidade de 3 para 5", "condicao": "Total recalculado"},
+    {"id": "CA021", "descricao": "Finaliza com forma pendente", "condicao": "status_pagamento = 'pendente'"},
+    {"id": "CA022", "descricao": "Finaliza sem internet", "condicao": "sync_status = 'pending'"},
+    {"id": "CA023", "descricao": "Cancela venda em andamento", "condicao": "Nada persistido"},
+    {"id": "CA024", "descricao": "Resumo exibe itens, valores e total", "condicao": "Dados conferem com o registrado"},
+    {"id": "CA025", "descricao": "Acessa contas a receber", "condicao": "Apenas vendas pendentes aparecem"},
+    {"id": "CA026", "descricao": "Marca venda de R$ 50 como paga", "condicao": "Venda some da lista, total diminui"},
+    {"id": "CA027", "descricao": "Pagamento parcial de R$ 30 em venda de R$ 100", "condicao": "Recebido: R$ 30 — Restante: R$ 70"},
+    {"id": "CA028", "descricao": "Duas baixas parciais (R$ 30 + R$ 70)", "condicao": "Venda marcada como paga"},
+    {"id": "CA029", "descricao": "Total em aberto", "condicao": "Soma correta das pendências"},
+    {"id": "CA030", "descricao": "Filtro por cliente 'Maria'", "condicao": "Apenas vendas da Maria"},
+    {"id": "CA031", "descricao": "Abre o app e vê 'Vendas hoje: R$ 350 — 5 vendas'", "condicao": "Valores conferem com SQLite"},
+    {"id": "CA032", "descricao": "Vê 'A receber: R$ 120'", "condicao": "Soma correta das pendências"},
+    {"id": "CA033", "descricao": "Navega para últimos 7 dias", "condicao": "Lista com 7 linhas"},
+    {"id": "CA034", "descricao": "Gráfico de barras com 7 colunas", "condicao": "Altura proporcional ao valor"},
+    {"id": "CA035", "descricao": "Registra venda e volta ao dashboard", "condicao": "Números atualizados"},
+    {"id": "CA036", "descricao": "Dashboard é a primeira tela após login", "condicao": "Rota inicial /dashboard"}
+  ],
+  "tasks": [
+    {"id": "T01", "descricao": "Criar feature slice auth/ (data, domain, presentation, di)", "epic": "epic_auth_sync"},
+    {"id": "T02", "descricao": "Implementar AuthRemoteDataSource (Supabase Auth)", "epic": "epic_auth_sync"},
+    {"id": "T03", "descricao": "Implementar AuthRepository com session persistente", "epic": "epic_auth_sync"},
+    {"id": "T04", "descricao": "Criar AuthBloc (login, cadastro, logout, verificar sessão)", "epic": "epic_auth_sync"},
+    {"id": "T05", "descricao": "Criar tela de login", "epic": "epic_auth_sync"},
+    {"id": "T06", "descricao": "Criar tela de cadastro", "epic": "epic_auth_sync"},
+    {"id": "T07", "descricao": "Implementar splash screen que verifica sessão", "epic": "epic_auth_sync"},
+    {"id": "T08", "descricao": "Implementar fluxo de restauração de dados pós-login", "epic": "epic_auth_sync"},
+    {"id": "T09", "descricao": "Criar serviço SyncEngine em core/sync/", "epic": "epic_auth_sync"},
+    {"id": "T10", "descricao": "Implementar tabela sync_log no SQLite", "epic": "epic_auth_sync"},
+    {"id": "T11", "descricao": "Implementar push (local → Supabase) por lote", "epic": "epic_auth_sync"},
+    {"id": "T12", "descricao": "Implementar pull (Supabase → local) incremental", "epic": "epic_auth_sync"},
+    {"id": "T13", "descricao": "Implementar monitor de conectividade (connectivity_plus)", "epic": "epic_auth_sync"},
+    {"id": "T14", "descricao": "Implementar retry automático com backoff exponencial", "epic": "epic_auth_sync"},
+    {"id": "T15", "descricao": "Criar widget SyncIndicator (AppBar)", "epic": "epic_auth_sync"},
+    {"id": "T16", "descricao": "Implementar sync manual (botão Sincronizar agora)", "epic": "epic_auth_sync"},
+    {"id": "T17", "descricao": "Registrar dependências no GetIt", "epic": "epic_auth_sync"},
+    {"id": "T18", "descricao": "Criar feature slice clientes/", "epic": "epic_clientes"},
+    {"id": "T19", "descricao": "Implementar model Cliente com fromMap/toMap e toJson", "epic": "epic_clientes"},
+    {"id": "T20", "descricao": "Implementar ClientesLocalDataSource (CRUD sqflite + LIKE)", "epic": "epic_clientes"},
+    {"id": "T21", "descricao": "Implementar ClientesRemoteDataSource (CRUD Supabase)", "epic": "epic_clientes"},
+    {"id": "T22", "descricao": "Implementar ClientesRepository (local-first)", "epic": "epic_clientes"},
+    {"id": "T23", "descricao": "Criar ClientesBloc", "epic": "epic_clientes"},
+    {"id": "T24", "descricao": "Criar tela de listagem com search bar", "epic": "epic_clientes"},
+    {"id": "T25", "descricao": "Criar formulário de cadastro/edição", "epic": "epic_clientes"},
+    {"id": "T26", "descricao": "Criar tela de detalhe com histórico e total devido", "epic": "epic_clientes"},
+    {"id": "T27", "descricao": "Implementar validação de telefone duplicado", "epic": "epic_clientes"},
+    {"id": "T28", "descricao": "Registrar dependências no GetIt", "epic": "epic_clientes"},
+    {"id": "T29", "descricao": "Criar feature slice produtos/", "epic": "epic_produtos"},
+    {"id": "T30", "descricao": "Implementar model Produto", "epic": "epic_produtos"},
+    {"id": "T31", "descricao": "Implementar ProdutosLocalDataSource", "epic": "epic_produtos"},
+    {"id": "T32", "descricao": "Implementar ProdutosRemoteDataSource", "epic": "epic_produtos"},
+    {"id": "T33", "descricao": "Implementar ProdutosRepository", "epic": "epic_produtos"},
+    {"id": "T34", "descricao": "Criar ProdutosBloc", "epic": "epic_produtos"},
+    {"id": "T35", "descricao": "Criar tela de listagem com search bar", "epic": "epic_produtos"},
+    {"id": "T36", "descricao": "Criar formulário de cadastro/edição", "epic": "epic_produtos"},
+    {"id": "T37", "descricao": "Implementar validações (nome obrigatório, preço > 0, duplicidade)", "epic": "epic_produtos"},
+    {"id": "T38", "descricao": "Registrar dependências no GetIt", "epic": "epic_produtos"},
+    {"id": "T39", "descricao": "Criar feature slice vendas/", "epic": "epic_vendas"},
+    {"id": "T40", "descricao": "Implementar models Venda e ItemVenda", "epic": "epic_vendas"},
+    {"id": "T41", "descricao": "Implementar VendasLocalDataSource (transação atômica)", "epic": "epic_vendas"},
+    {"id": "T42", "descricao": "Implementar VendasRemoteDataSource", "epic": "epic_vendas"},
+    {"id": "T43", "descricao": "Implementar VendasRepository", "epic": "epic_vendas"},
+    {"id": "T44", "descricao": "Criar VendasBloc (iniciar, adicionar, remover, ajustar, finalizar, cancelar)", "epic": "epic_vendas"},
+    {"id": "T45", "descricao": "Criar tela de seleção de cliente", "epic": "epic_vendas"},
+    {"id": "T46", "descricao": "Criar tela de itens da venda", "epic": "epic_vendas"},
+    {"id": "T47", "descricao": "Criar bottom sheet de seleção de produto", "epic": "epic_vendas"},
+    {"id": "T48", "descricao": "Criar bottom sheet de forma de pagamento", "epic": "epic_vendas"},
+    {"id": "T49", "descricao": "Criar tela de confirmação/resumo", "epic": "epic_vendas"},
+    {"id": "T50", "descricao": "Criar tela de venda finalizada", "epic": "epic_vendas"},
+    {"id": "T51", "descricao": "Implementar cálculo de totais em tempo real", "epic": "epic_vendas"},
+    {"id": "T52", "descricao": "Implementar rascunho automático", "epic": "epic_vendas"},
+    {"id": "T53", "descricao": "Registrar dependências no GetIt", "epic": "epic_vendas"},
+    {"id": "T54", "descricao": "Criar feature slice contas_receber/", "epic": "epic_checkout"},
+    {"id": "T55", "descricao": "Implementar repositório filtrando VendasRepository", "epic": "epic_checkout"},
+    {"id": "T56", "descricao": "Criar ContasReceberBloc", "epic": "epic_checkout"},
+    {"id": "T57", "descricao": "Criar tela de listagem com totalizador", "epic": "epic_checkout"},
+    {"id": "T58", "descricao": "Implementar filtro por cliente", "epic": "epic_checkout"},
+    {"id": "T59", "descricao": "Criar bottom sheet de baixa de pagamento", "epic": "epic_checkout"},
+    {"id": "T60", "descricao": "Criar tela de detalhe com histórico", "epic": "epic_checkout"},
+    {"id": "T61", "descricao": "Implementar atualização de status_pagamento", "epic": "epic_checkout"},
+    {"id": "T62", "descricao": "Implementar cálculo de valor restante", "epic": "epic_checkout"},
+    {"id": "T63", "descricao": "Registrar dependências no GetIt", "epic": "epic_checkout"},
+    {"id": "T64", "descricao": "Criar feature slice dashboard/", "epic": "epic_dashboard"},
+    {"id": "T65", "descricao": "Implementar DashboardRepository (agregações SQLite)", "epic": "epic_dashboard"},
+    {"id": "T66", "descricao": "Criar DashboardBloc", "epic": "epic_dashboard"},
+    {"id": "T67", "descricao": "Criar tela com cards (Vendas Hoje, Recebido Hoje, A Receber)", "epic": "epic_dashboard"},
+    {"id": "T68", "descricao": "Criar seção Últimos 7 dias", "epic": "epic_dashboard"},
+    {"id": "T69", "descricao": "Implementar gráfico de barras (fl_chart)", "epic": "epic_dashboard"},
+    {"id": "T70", "descricao": "Adicionar pull-to-refresh", "epic": "epic_dashboard"},
+    {"id": "T71", "descricao": "Implementar refresh automático ao voltar", "epic": "epic_dashboard"},
+    {"id": "T72", "descricao": "Registrar dependências no GetIt", "epic": "epic_dashboard"},
+    {"id": "T73", "descricao": "Configurar GoRouter para rota inicial /dashboard", "epic": "epic_dashboard"}
+  ],
+  "dependencias": {
+    "epic_auth_sync": ["Projeto Flutter inicializado com GetIt, GoRouter, sqflite", "Supabase Auth configurado"],
+    "epic_clientes": ["epic_auth_sync (sessão + sync engine)"],
+    "epic_produtos": ["epic_auth_sync (sessão + sync engine)"],
+    "epic_vendas": ["epic_clientes", "epic_produtos", "epic_auth_sync"],
+    "epic_checkout": ["epic_vendas", "epic_clientes"],
+    "epic_dashboard": ["epic_vendas", "epic_checkout"]
+  },
+  "inconsistencias": [
+    {
+      "tipo": "divergencia_arquitetura",
+      "descricao": "SPEC define 'Riverbloc' (Bloc + Riverpod) como gerenciamento de estado, mas os epics usam apenas 'Bloc' na nomenclatura (AuthBloc, ClientesBloc, etc.) sem referência a Riverpod. Não há menção a Riverpod em nenhum epic.",
+      "fontes": ["SPEC.md:38", "epic_auth_sync.md:17", "epic_clientes.md:33", "epic_produtos.md:33", "epic_vendas.md:37", "epic_checkout.md:31", "epic_dashboard.md:30"]
+    },
+    {
+      "tipo": "lacuna_rastreabilidade",
+      "descricao": "PRD define 7 Casos de Uso (UC01-UC07) que não são referenciados em nenhum epic ou na SPEC. Não há rastreabilidade entre os casos de uso do PRD e os requisitos funcionais nos epics.",
+      "fontes": ["PRD.md:34-40"]
+    },
+    {
+      "tipo": "funcionalidade_fora_escopo",
+      "descricao": "RF048 (ranking de clientes) e RF049 (forma de pagamento mais usada) são prioridade Baixa e não são mencionados no PRD como funcionalidades principais. PRD lista explicitamente 'relatórios avançados' como fora do escopo da v1.0, o que pode incluir estas funcionalidades.",
+      "fontes": ["PRD.md:59-60", "epic_dashboard.md:15-16"]
+    },
+    {
+      "tipo": "funcionalidade_fora_escopo",
+      "descricao": "RF023 (duplicar produto) é prioridade Baixa e não é mencionado no PRD como funcionalidade principal do catálogo de produtos.",
+      "fontes": ["PRD.md:24", "epic_produtos.md:14"]
+    },
+    {
+      "tipo": "metrica_nao_refletida",
+      "descricao": "PRD define métrica de sucesso 'Registro de venda em < 30 segundos' mas este requisito não é formalizado como RF ou RNF em nenhum epic. A métrica existe no PRD mas não tem requisito correspondente.",
+      "fontes": ["PRD.md:45"]
+    },
+    {
+      "tipo": "ausencia_rnf_epics",
+      "descricao": "Apenas o epic_auth_sync define requisitos não-funcionais (RNF001-RNF005). Os demais 5 epics não possuem seção de RNFs, deixando lacunas de desempenho, segurança e usabilidade específicas para clientes, produtos, vendas, checkout e dashboard.",
+      "fontes": ["epic_clientes.md", "epic_produtos.md", "epic_vendas.md", "epic_checkout.md", "epic_dashboard.md"]
+    },
+    {
+      "tipo": "padronizacao_ids",
+      "descricao": "Os IDs de RF e CA são repetidos entre epics (cada epic começa com RF001, CA001). Na consolidação foi necessário renumerar sequencialmente para RF001-RF049, CA001-CA036. Isso indica falta de padronização global de IDs nos documentos fonte.",
+      "fontes": ["epic_auth_sync.md", "epic_clientes.md", "epic_produtos.md", "epic_vendas.md", "epic_checkout.md", "epic_dashboard.md"]
+    },
+    {
+      "tipo": "divergencia_stack",
+      "descricao": "SPEC menciona 'Flutter Team Architecture' no nome da arquitetura, mas os epics seguem apenas o padrão 'Vertical Slice' com data/domain/presentation. Não há referência ao 'Team Architecture' nos epics.",
+      "fontes": ["SPEC.md:4", "epic_auth_sync.md:39", "epic_clientes.md:29"]
+    },
+    {
+      "tipo": "dependencia_nao_explicita",
+      "descricao": "O epic_auth_sync lista dependências de infraestrutura (GetIt, GoRouter, sqflite, Supabase Auth) mas não menciona que outras epics dependem dele. Apenas epic_clientes e epic_produtos declaram explicitamente dependência de epic_auth_sync; epic_vendas, epic_checkout e epic_dashboard têm dependências indiretas mas não listam epic_auth_sync em suas dependências.",
+      "fontes": ["epic_auth_sync.md:57-58", "epic_vendas.md:48-50", "epic_checkout.md:40-41", "epic_dashboard.md:40-41"]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "project_name": "venda_fácil",
+  "stack": {
+    "framework": "flutter",
+    "language": "dart",
+    "db_local": "sqflite",
+    "db_cloud": "supabase",
+    "auth": "Supabase Auth"
+  },
+  "tools": {},
+  "env_keys": [
+    "SUPABASE_URL",
+    "SUPABASE_ANON_KEY"
+  ],
+  "dirs": [
+    {
+      "dir": "lib/core",
+      "existe": false
+    },
+    {
+      "dir": "lib/features",
+      "existe": false
+    },
+    {
+      "dir": "test",
+      "existe": false
+    },
+    {
+      "dir": "supabase/migrations",
+      "existe": false
+    }
+  ]
+}

@@ -1,38 +1,82 @@
-# MCP - Configuração de Orquestração do Pipeline
-# Define a ordem de execução dos agentes, paralelismo (fan-out) e sincronização (gates).
+pipeline:
+  nome: "Venda Fácil — Pipeline Ágil"
+  versao: "2.0.0"
 
 agentes:
+  - setup_validator
   - spec_reader
   - architect
   - code_generator
   - test_runner
   - quality_auditor
   - release_manager
+  - learning_agent
+  - kanban_manager
 
-triggers:
-  # Fase 1 — Análise (sequencial)
-  - evento: spec_disponivel
-    agente: spec_reader
+eventos:
+  # Fase 0 — Setup (sequencial)
+  setup_validado:
+    origem: setup_validator
+    destino: spec_reader
 
-  - evento: requisitos_interpretados
-    agente: architect
+  # Fase 1 — Planejamento (sequencial)
+  requisitos_interpretados:
+    origem: spec_reader
+    destino: architect
+  arquitetura_definida:
+    origem: architect
+    destino: code_generator
+  codigo_gerado:
+    origem: code_generator
+    destino: test_runner
+    destino: quality_auditor  # ← fan-out (paralelo)
 
-  - evento: arquitetura_definida
-    agente: code_generator
+  # Fase 2 — Validação Paralela (fan-out)
+  testes_executados:
+    origem: test_runner
+  qualidade_aprovada:
+    origem: quality_auditor
 
-  # Fase 2 — Validação paralela (fan-out)
-  # Ambos independentes: quality_auditor faz análise estática, test_runner executa testes
-  - evento: codigo_gerado
-    agente: test_runner
+  # Fase 3 — Gate + Release (só avança se testes passarem)
+  testes_aprovados:
+    origem: test_runner
+    condicao: "status == sucesso && cobertura >= 80"
+  qualidade_aprovada:
+    origem: quality_auditor
+    condicao: "status == aprovado"
+  commit_permitido:
+    origem: release_manager
+    condicao: "gates.validacao_completa.ok == true"
+  release_concluida:
+    origem: release_manager
+    destino: learning_agent
 
-  - evento: codigo_gerado
-    agente: quality_auditor
+  # Fase 4 — Aprendizado
+  ciclo_concluido:
+    origem: learning_agent
+    destino: kanban_manager
 
-  # Fase 3 — Gate: release_manager só executa após AMBOS concluírem
+  # Fase 5 — Gestão Visual
+  boards_atualizados:
+    origem: kanban_manager
+
 gates:
   - nome: validacao_completa
     aguardar:
-      - evento: testes_executados
+      - evento: testes_aprovados
       - evento: qualidade_aprovada
     entao:
       agente: release_manager
+    regra: |
+      Commits e push para o repositório remoto SÓ podem ocorrer
+      após este gate ser aprovado. Nenhum commit direto em develop
+      ou main sem testes e qualidade validados.
+  - nome: ciclo_concluido
+    aguardar:
+      - evento: release_concluida
+    entao:
+      agente: learning_agent
+
+setup:
+  validator_file: project/setup/SETUP.md
+  config_output: project/setup/config_do_projeto.json

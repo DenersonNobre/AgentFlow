@@ -1,0 +1,52 @@
+{
+  "fase_atual": 2,
+  "etapas": {
+    "setup_validator": {
+      "status": "concluido",
+      "atualizado_em": "2026-05-16T01:09:29.404043"
+    },
+    "spec_reader": {
+      "status": "concluido",
+      "atualizado_em": "2026-05-16T01:09:29.439567"
+    },
+    "architect": {
+      "status": "concluido",
+      "atualizado_em": "2026-05-16T01:09:29.439567"
+    },
+    "code_generator": {
+      "status": "concluido",
+      "atualizado_em": "2026-05-16T01:09:29.439567"
+    },
+    "test_runner": {
+      "status": "aguardando_ia",
+      "atualizado_em": "2026-05-16T12:26:22.370852"
+    },
+    "quality_auditor": {
+      "status": "aguardando_ia",
+      "atualizado_em": "2026-05-16T12:26:22.378449"
+    },
+    "release_manager": {
+      "status": "aguardando_ia",
+      "atualizado_em": "2026-05-16T12:15:25.782484"
+    },
+    "learning_agent": {
+      "status": "aguardando_ia",
+      "atualizado_em": "2026-05-16T12:15:25.822438"
+    }
+  },
+  "artefatos": {
+    "config_do_projeto.json": "A:\\Projetos\\LLM\\projeto-vendas_pessoais\\project\\setup\\config_do_projeto.json",
+    "interpreted_requirements.json": "A:\\Projetos\\LLM\\projeto-vendas_pessoais\\pipeline\\interpreted_requirements.json",
+    "test-report.json": "A:\\Projetos\\LLM\\projeto-vendas_pessoais\\pipeline\\test-report.json",
+    "quality-report.json": "A:\\Projetos\\LLM\\projeto-vendas_pessoais\\pipeline\\quality-report.json",
+    "release_manager_prompt.md": "A:\\Projetos\\LLM\\projeto-vendas_pessoais\\pipeline\\release_manager_prompt.md",
+    "learning_agent_prompt.md": "A:\\Projetos\\LLM\\projeto-vendas_pessoais\\pipeline\\learning_agent_prompt.md",
+    "test_runner_prompt.md": "A:\\Projetos\\LLM\\projeto-vendas_pessoais\\pipeline\\test_runner_prompt.md",
+    "quality_auditor_prompt.md": "A:\\Projetos\\LLM\\projeto-vendas_pessoais\\pipeline\\quality_auditor_prompt.md"
+  },
+  "iniciado_em": "2026-05-16T00:21:37.227960",
+  "concluido_em": "2026-05-16T12:15:25.827191",
+  "status": "concluido",
+  "etapa_atual": "test_runner",
+  "mensagem_retomada": "Gate validacao_completa aprovado. Executar Release Manager primeiro, depois Learning Agent, Kanban, commit."
+}

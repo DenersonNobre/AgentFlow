@@ -1,0 +1,20 @@
+Stack Docker local funcional com proxy nginx. Pendente: restartar GoTrue pra pegar search_path e testar signup.
+
+Estado:
+- Postgres (5432), GoTrue (9999), PostgREST (3000), nginx proxy (8000) — todos rodando
+- .env_dev aponta SUPABASE_URL=http://localhost:8000 (proxy)
+- GoTrue retorna 500: relation "identities" does not exist (search_path não configurado)
+- ALTER ROLE postgres SET search_path já executado — falta restartar GoTrue
+
+Comandos:
+1. cd supabase && docker compose restart gotrue
+2. curl -X POST http://localhost:8000/auth/v1/signup -d '{"email":"test@test.com","password":"test123456"}' -H "apikey: supabase-anon-key"
+3. Se ok, rodar flutter run --dart-define-from-file=.env_dev
+4. flutter test test/integration/health_check_test.dart
+
+Testes de integração corrigidos:
+- URL hardcoded 3000 → 8000
+- helpers.dart checa proxy porta 8000
+- health_check_test.dart criado
+
+docs/RESUME.md atualizado com progresso da sessão.
